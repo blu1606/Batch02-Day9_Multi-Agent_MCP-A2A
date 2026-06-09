@@ -1,0 +1,34 @@
+# Nhiều người nước ngoài 'phê' ma túy trong khách sạn ở TP HCM
+
+**Source:** https://vnexpress.net/nhieu-nguoi-nuoc-ngoai-phe-ma-tuy-trong-khach-san-o-tp-hcm-5082175.html
+**Crawled:** 2026-06-08T14:17:26.677002
+
+---
+
+# Nhiều người nước ngoài 'phê' ma túy trong khách sạn ở TP HCM
+
+*Cảnh sát kiểm tra nhiều khách sạn, phát hiện hàng chục người Malaysia, Indonesia sử dụng ma túy và nghi liên quan hoạt động lừa đảo công nghệ cao.*
+
+Ngày 5/6, Công an phường Thủ Đức phối hợp Phòng Cảnh sát Hình sự cùng các đơn vị nghiệp vụ Công an TP HCM khám nghiệm nhiều địa điểm, lấy lời khai nhóm người nước ngoài để điều tra hành vi Sử dụng trái phép chất ma túy và các dấu hiệu lừa đảo.
+
+Do vụ việc có nhiều người tham gia, cơ quan điều tra đang phân loại, làm rõ vai trò của từng người, đặc biệt là những nghi can cầm đầu và tổ chức hoạt động tội phạm.
+
+Trước đó, từ nguồn tin của người dân, cảnh sát phát hiện một cơ sở lưu trú trên đường 37 có nhóm người nước ngoài thuê phòng dài ngày.
+
+Theo nhà chức trách, nhóm này sinh hoạt khép kín, ít tiếp xúc với bên ngoài, chủ yếu ra vào lúc chiều tối hoặc đêm khuya và có dấu hiệu sử dụng ma túy.
+
+Khuya 3/6, lực lượng chức năng bất ngờ kiểm tra địa điểm này, phát hiện 5 người Malaysia. Tại khu vực sinh hoạt chung và các phòng ngủ, cảnh sát thu giữ nhiều tinh thể nghi ma túy cùng các dụng cụ sử dụng chất cấm.
+
+Mở rộng kiểm tra, công an thu giữ nhiều phông nền, bảng hiệu mô phỏng cơ quan thực thi pháp luật nước ngoài và các kịch bản gọi điện được soạn sẵn.
+
+Xung quanh khu vực, lực lượng chức năng còn phát hiện nhiều máy tính, thiết bị mạng bị vứt bỏ nhằm phi tang.
+
+Bên trong các phòng thuê, hệ thống thiết bị điện tử được bố trí như một tổng đài trực tuyến. Công an cũng thu giữ nhiều tài liệu giả liên quan cơ quan cảnh sát tại Malaysia.
+
+Tiếp tục truy xét trong đêm, cơ quan điều tra kiểm tra thêm một khách sạn và cơ sở kinh doanh trên đường 18, phát hiện 21 người Malaysia khác.
+
+Kết quả xét nghiệm nhanh cho thấy 18 người trong tổng số những người liên quan dương tính với ma túy.
+
+Động thái này nằm trong đợt cao điểm 45 ngày đêm trấn áp tội phạm theo kế hoạch của Công an TP HCM.
+
+Nhật Vy

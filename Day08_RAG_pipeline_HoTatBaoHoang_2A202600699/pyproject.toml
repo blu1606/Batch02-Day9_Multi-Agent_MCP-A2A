@@ -1,0 +1,23 @@
+[project]
+name = "day08-rag-pipeline-hotatbaohoang-2a202600699"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "chainlit>=2.11.1",
+    "chromadb>=1.5.9",
+    "crawl4ai>=0.8.9",
+    "deepeval>=4.0.5",
+    "langchain-text-splitters>=0.2.0",
+    "langgraph>=0.6.0",
+    "markitdown>=0.1.0",
+    "openai>=1.30.0",
+    "pageindex>=0.1.0",
+    "python-dotenv>=1.0.0",
+    "rank-bm25>=0.2.2",
+    "requests>=2.31.0",
+    "sentence-transformers>=2.2.0",
+    "streamlit>=1.35.0",
+    "tokenizers>=0.22.0,<=0.23.0",
+]

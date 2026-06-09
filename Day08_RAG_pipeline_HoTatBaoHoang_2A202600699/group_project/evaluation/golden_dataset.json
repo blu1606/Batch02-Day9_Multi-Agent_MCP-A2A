@@ -1,0 +1,167 @@
+[
+  {
+    "id": "gq01",
+    "question": "Chất 3-CMC và Bromazolam được bổ sung vào danh mục chất ma túy nào theo Nghị định 90/2024/NĐ-CP và có hiệu lực từ khi nào?",
+    "expected_answer": "Theo Nghị định 90/2024/NĐ-CP (có hiệu lực từ ngày 17 tháng 7 năm 2024), chất 3-Chloromethcathinone (3-CMC) được bổ sung vào Danh mục II (các chất ma túy được dùng hạn chế trong phân tích, kiểm nghiệm, nghiên cứu khoa học, điều tra tội phạm hoặc trong lĩnh vực y tế), còn Bromazolam được bổ sung vào Danh mục III (các chất ma túy được dùng trong phân tích, kiểm nghiệm, nghiên cứu khoa học, điều tra tội phạm hoặc trong lĩnh vực y tế, thú y).",
+    "expected_sources": ["legal/Nghi-dinh-90-2024-ND-CP-sua-doi-Danh-muc-chat-ma-tuy-tien-chat-theo-Nghi-dinh-57-2022-ND-CP-607161.md"],
+    "difficulty": "medium",
+    "category": "Legal Updates",
+    "rag_skill_tested": "Freshness & version reasoning",
+    "points": 10,
+    "note": "Kiểm tra khả năng phân biệt danh mục ma túy mới bổ sung theo Nghị định 90/2024"
+  },
+  {
+    "id": "gq02",
+    "question": "Theo Nghị định 90/2024/NĐ-CP, có bao nhiêu chất được bổ sung vào Danh mục II và Danh mục III?",
+    "expected_answer": "Theo Nghị định 90/2024/NĐ-CP, có 14 chất được bổ sung vào Danh mục II (bao gồm 3-CMC, 2-Methyl-AP-237, 3-MMC, ADB-4en-PINACA, ADB-FUBIATA, ADB-INACA, Alpha-PiHP, Butonitazene, Etazene, Etonitazepyne, MDMB-BUTINACA, MDMB-INACA, N,N-Dimethylpentylone, Protonitazene) và 1 chất được bổ sung vào Danh mục III (Bromazolam).",
+    "expected_sources": ["legal/Nghi-dinh-90-2024-ND-CP-sua-doi-Danh-muc-chat-ma-tuy-tien-chat-theo-Nghi-dinh-57-2022-ND-CP-607161.md"],
+    "difficulty": "hard",
+    "category": "Legal Fact Retrieval",
+    "rag_skill_tested": "Multi-detail extraction",
+    "points": 10,
+    "note": "Kiểm tra khả năng đếm và liệt kê chính xác các chất ma túy mới bổ sung"
+  },
+  {
+    "id": "gq03",
+    "question": "Trong vụ án ma túy năm 2012 tại Quảng Ninh liên quan đến bà trùm Nguyễn Thị Bích Ngọc, lực lượng công an đã triệt phá đường dây buôn bán bao nhiêu tấn heroin?",
+    "expected_answer": "Trong đại án ma túy năm 2012 tại Quảng Ninh, lực lượng công an đã triệt phá đường dây buôn bán tổng cộng 12 tấn heroin, khởi tố vụ án từ manh mối là một bức điện mật, dẫn đến việc tuyên 30 án tử hình.",
+    "expected_sources": ["news/article_01.md"],
+    "difficulty": "easy",
+    "category": "News Retrieval",
+    "rag_skill_tested": "Specific numeric fact retrieval",
+    "points": 5,
+    "note": "Kiểm tra khả năng lấy thông tin số liệu cụ thể từ bài viết tin tức về vụ án"
+  },
+  {
+    "id": "gq04",
+    "question": "Tác hại của ma túy đối với tim mạch theo Bác sĩ Trần Thị Huyền Trang bao gồm những nguy cơ gì?",
+    "expected_answer": "Theo BS.CKI Trần Thị Huyền Trang, ma túy tàn phá tim mạch nghiêm trọng như gây rối loạn nhịp tim (nhanh thất, rung thất dẫn đến đột tử), tăng huyết áp kịch phát, co thắt mạch vành đột ngột gây nhồi máu cơ tim cấp (kể cả ở người trẻ không có mảng xơ vữa), viêm nội tâm mạc nhiễm trùng (đặc biệt là van ba lá do tiêm chích chung kim bẩn), bệnh cơ tim giãn và suy tim mạn tính, đột quỵ não do xuất huyết hoặc nhồi máu não.",
+    "expected_sources": ["news/article_04.md"],
+    "difficulty": "medium",
+    "category": "Medical News Analysis",
+    "rag_skill_tested": "Multi-detail retrieval & synthesis",
+    "points": 10,
+    "note": "Kiểm tra khả năng tổng hợp nhiều tác hại tim mạch từ bài báo khoa học"
+  },
+  {
+    "id": "gq05",
+    "question": "Theo nghiên cứu công bố trên The Guardian do Tiến sĩ Megan Ritson thực hiện, việc sử dụng amphetamine làm tăng nguy cơ đột quỵ lên bao nhiêu phần trăm?",
+    "expected_answer": "Nghiên cứu của Tiến sĩ Megan Ritson (Đại học Cambridge) công bố trên The Guardian của Anh ghi nhận những người dùng amphetamine có nguy cơ đột quỵ tăng 122% so với người không sử dụng, và việc dùng ma túy nói chung có thể làm tăng gấp đôi nguy cơ đột quỵ.",
+    "expected_sources": ["news/article_04.md"],
+    "difficulty": "easy",
+    "category": "Scientific News Analysis",
+    "rag_skill_tested": "Specific numeric fact retrieval",
+    "points": 5,
+    "note": "Kiểm tra tính chính xác của RAG đối với con số phần trăm nguy cơ đột quỵ"
+  },
+  {
+    "id": "gq06",
+    "question": "Chi tiết vụ việc công an TP.HCM đột kích bắt giữ nhóm người nước ngoài sử dụng ma túy và lừa đảo công nghệ cao vào đầu tháng 6 năm 2026 như thế nào?",
+    "expected_answer": "Đầu tháng 6 năm 2026 (khuya 3/6), Công an phường Thủ Đức phối hợp các đơn vị nghiệp vụ Công an TP.HCM bất ngờ kiểm tra một cơ sở lưu trú trên đường 37, phát hiện 5 người Malaysia đang tàng trữ tinh thể nghi ma túy và thiết bị tổng hợp giả danh cơ quan pháp luật. Mở rộng kiểm tra một khách sạn trên đường 18 phát hiện thêm 21 người Malaysia khác. Qua xét nghiệm nhanh, có tổng cộng 18 người dương tính với ma túy và liên quan đến kịch bản gọi điện lừa đảo công nghệ cao.",
+    "expected_sources": ["news/article_05.md"],
+    "difficulty": "hard",
+    "category": "Crime News Synthesis",
+    "rag_skill_tested": "Multi-document timeline retrieval",
+    "points": 10,
+    "note": "Tổng hợp diễn biến vụ việc bắt giữ người nước ngoài sử dụng ma túy"
+  },
+  {
+    "id": "gq07",
+    "question": "Cơ quan công an tạm giữ hình sự hai đối tượng Bùi Văn Đạt và Bùi Mạnh Thắng ở Phú Thọ vì hành vi gì? Kết quả kiểm tra nhanh của họ có gì đáng chú ý?",
+    "expected_answer": "Bùi Văn Đạt (25 tuổi) và Bùi Mạnh Thắng (26 tuổi) bị Công an tỉnh Phú Thọ tạm giữ hình sự vì hành vi không chấp hành hiệu lệnh cảnh sát giao thông, tăng ga tông thẳng vào Trung tá Bùi Thanh Tùng trên tỉnh lộ 12B vào ngày 6/6. Kết quả kiểm tra nhanh cho thấy cả hai đều dương tính với chất ma túy (heroin), ngoài ra tài xế Đạt còn lái xe trong tình trạng có nồng độ cồn.",
+    "expected_sources": ["news/article_03.md"],
+    "difficulty": "medium",
+    "category": "Crime News Retrieval",
+    "rag_skill_tested": "Multi-detail extraction from news",
+    "points": 8,
+    "note": "Kiểm tra thông tin chi tiết về hành vi và kết quả xét nghiệm ma túy của các đối tượng"
+  },
+  {
+    "id": "gq08",
+    "question": "Luật Phòng, chống ma túy quy định những hành vi nào bị nghiêm cấm?",
+    "expected_answer": "Theo Luật Phòng, chống ma túy, các hành vi bị nghiêm cấm bao gồm: Trồng cây chứa chất ma túy; Sản xuất, tàng trữ, vận chuyển, mua bán, phân phối, trao đổi, xuất khẩu, nhập khẩu, quá cảnh trái phép chất ma túy, tiền chất, thuốc gây nghiện, thuốc hướng thần; Sử dụng, tổ chức sử dụng trái phép chất ma túy; cưỡng bức, lôi kéo người khác sử dụng trái phép chất ma túy; Sản xuất, tàng trữ, vận chuyển, mua bán phương tiện, dụng cụ dùng vào việc sản xuất hoặc sử dụng trái phép chất ma túy; Hợp pháp hóa tiền, tài sản do phạm tội về ma túy mà có; Chống đối hoặc cản trở việc phòng, chống ma túy.",
+    "expected_sources": ["legal/Luat-Phong-chong-ma-tuy-2021-445185.md"],
+    "difficulty": "medium",
+    "category": "Legal Restrictions",
+    "rag_skill_tested": "Completeness in legal rules",
+    "points": 10,
+    "note": "Kiểm tra độ đầy đủ khi liệt kê các hành vi nghiêm cấm trong Luật ma túy"
+  },
+  {
+    "id": "gq09",
+    "question": "Trách nhiệm của cá nhân, gia đình trong phòng chống ma túy được quy định như thế nào trong luật?",
+    "expected_answer": "Cá nhân, gia đình có trách nhiệm: Tuyên truyền, giáo dục thành viên trong gia đình về tác hại của ma túy và thực hiện quy định pháp luật; Đấu tranh, ngăn chặn thành viên trong gia đình vi phạm pháp luật về ma túy; Thực hiện đúng chỉ định của bác sĩ khi sử dụng thuốc gây nghiện, hướng thần; Hợp tác với cơ quan chức năng trong việc cung cấp thông tin về tội phạm ma túy; Tham gia cai nghiện khi bị phát hiện hoặc vận động người thân tham gia cai nghiện.",
+    "expected_sources": ["legal/Luat-Phong-chong-ma-tuy-2021-445185.md"],
+    "difficulty": "medium",
+    "category": "Legal Duties",
+    "rag_skill_tested": "Legal responsibility extraction",
+    "points": 8,
+    "note": "Kiểm tra khả năng tóm tắt nghĩa vụ của người dân đối với phòng chống ma túy"
+  },
+  {
+    "id": "gq10",
+    "question": "Cơ quan chuyên trách phòng, chống tội phạm về ma túy gồm những lực lượng nào theo Luật Phòng, chống ma túy?",
+    "expected_answer": "Theo Luật Phòng, chống ma túy, các cơ quan chuyên trách phòng, chống tội phạm về ma túy bao gồm: (1) Cơ quan chuyên trách thuộc Lực lượng Công an nhân dân, (2) Cơ quan chuyên trách thuộc Lực lượng Bộ đội Biên phòng, (3) Cơ quan chuyên trách thuộc Lực lượng Cảnh sát biển, (4) Cơ quan chuyên trách thuộc Lực lượng Hải quan.",
+    "expected_sources": ["legal/Luat-Phong-chong-ma-tuy-2021-445185.md"],
+    "difficulty": "easy",
+    "category": "Legal Authorities",
+    "rag_skill_tested": "Authority listing",
+    "points": 5,
+    "note": "Kiểm tra khả năng liệt kê 4 lực lượng chuyên trách chống tội phạm ma túy"
+  },
+  {
+    "id": "gq11",
+    "question": "Quy trình xác định tình trạng nghiện ma túy được thực hiện ở đâu và do ai tiến hành?",
+    "expected_answer": "Quy trình xác định tình trạng nghiện ma túy được thực hiện tại các cơ sở y tế đủ điều kiện theo quy định của Bộ Y tế. Người thực hiện xác định tình trạng nghiện ma túy là bác sĩ hoặc y sĩ được cấp chứng chỉ hành nghề khám bệnh, chữa bệnh và có chứng chỉ tập huấn về xác định tình trạng nghiện ma túy do cơ quan có thẩm quyền cấp.",
+    "expected_sources": ["legal/Nghi-dinh-105-2021-ND-CP-huong-dan-Luat-Phong-chong-ma-tuy-496664.md"],
+    "difficulty": "hard",
+    "category": "Legal Medical Process",
+    "rag_skill_tested": "Procedure verification",
+    "points": 10,
+    "note": "Kiểm tra chi tiết thủ tục hành chính và y tế về xác định tình trạng nghiện"
+  },
+  {
+    "id": "gq12",
+    "question": "Biện pháp cai nghiện ma túy bắt buộc áp dụng đối với những đối tượng nào và thời hạn cai nghiện bắt buộc là bao lâu?",
+    "expected_answer": "Biện pháp cai nghiện bắt buộc áp dụng đối với người nghiện ma túy từ đủ 18 tuổi trở lên khi: (1) Không đăng ký tự nguyện cai nghiện, đăng ký nhưng không thực hiện hoặc tự ý chấm dứt cai nghiện; (2) Trong thời gian cai nghiện tự nguyện bị phát hiện tiếp tục sử dụng ma túy; (3) Người nghiện ma túy chất dạng thuốc phiện không đăng ký hoặc vi phạm quy định điều trị thay thế. Thời hạn cai nghiện ma túy bắt buộc là từ 12 tháng đến 24 tháng.",
+    "expected_sources": ["legal/Luat-Phong-chong-ma-tuy-2021-445185.md"],
+    "difficulty": "hard",
+    "category": "Rehabilitation Policy",
+    "rag_skill_tested": "Policy logic & conditions",
+    "points": 10,
+    "note": "Kiểm tra điều kiện áp dụng và thời hạn cai nghiện bắt buộc đối với người lớn"
+  },
+  {
+    "id": "gq13",
+    "question": "Người nghiện ma túy từ đủ 12 tuổi đến dưới 18 tuổi bị đưa vào cơ sở cai nghiện bắt buộc trong trường hợp nào và thẩm quyền quyết định thuộc về ai?",
+    "expected_answer": "Người nghiện ma túy từ đủ 12 tuổi đến dưới 18 tuổi bị đưa vào cơ sở cai nghiện bắt buộc khi không đăng ký hoặc không thực hiện cai nghiện tự nguyện, hoặc tự ý chấm dứt cai nghiện tự nguyện, hoặc bị phát hiện sử dụng ma túy trong thời gian cai tự nguyện. Thẩm quyền quyết định đưa đối tượng này vào cơ sở cai nghiện bắt buộc thuộc về Tòa án nhân dân cấp huyện xét quyết định.",
+    "expected_sources": ["legal/Luat-Phong-chong-ma-tuy-2021-445185.md"],
+    "difficulty": "hard",
+    "category": "Juvenile Law",
+    "rag_skill_tested": "Authority & age scoping",
+    "points": 10,
+    "note": "Kiểm tra quy định riêng biệt cho trẻ vị thành niên và thẩm quyền của Tòa án cấp huyện"
+  },
+  {
+    "id": "gq14",
+    "question": "Đối tượng nào được quản lý sau cai nghiện ma túy tại nơi cư trú và thời hạn quản lý là bao lâu?",
+    "expected_answer": "Người đã hoàn thành cai nghiện bắt buộc hoặc hoàn thành cai nghiện tự nguyện tại cơ sở cai nghiện được quản lý sau cai nghiện tại nơi cư trú. Thời hạn quản lý sau cai nghiện là 01 năm đối với người hoàn thành cai nghiện bắt buộc hoặc cai tự nguyện tại cơ sở; và là 02 năm đối với người nghiện từ đủ 12 đến dưới 18 tuổi hoàn thành cai nghiện bắt buộc.",
+    "expected_sources": ["legal/Nghi-dinh-105-2021-ND-CP-huong-dan-Luat-Phong-chong-ma-tuy-496664.md"],
+    "difficulty": "hard",
+    "category": "Post-Rehabilitation Management",
+    "rag_skill_tested": "Multi-scenario temporal limits",
+    "points": 10,
+    "note": "Kiểm tra thời hạn quản lý sau cai nghiện phân chia theo đối tượng người lớn và người chưa thành niên"
+  },
+  {
+    "id": "gq15",
+    "question": "Kế hoạch trấn áp tội phạm ma túy của Công an TP.HCM nhắc tới trong vụ bắt giữ người nước ngoài có thời hạn bao nhiêu ngày?",
+    "expected_answer": "Kế hoạch trấn áp tội phạm của Công an TP.HCM nhắc tới trong bài viết về nhóm người nước ngoài lưu trú dài ngày thuê phòng sử dụng ma túy nằm trong đợt cao điểm kéo dài 45 ngày đêm.",
+    "expected_sources": ["news/article_05.md"],
+    "difficulty": "easy",
+    "category": "Crime News Details",
+    "rag_skill_tested": "Specific numeric fact retrieval",
+    "points": 5,
+    "note": "Kiểm tra khả năng tìm kiếm thông tin phụ (con số 45 ngày đêm) từ văn bản tin tức"
+  }
+]

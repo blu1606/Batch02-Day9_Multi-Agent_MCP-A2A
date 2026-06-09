@@ -1,0 +1,24 @@
+# Environment variables
+.env
+.env.*
+.env.local
+
+# Python caches
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.python-version
+.chainlit
+# Virtual Environments
+.venv/
+env/
+venv/
+ENV/
+.files
+
+# Local Vector DB and temporary files
+data/chroma_db/
+.claude/
+.deepeval/
