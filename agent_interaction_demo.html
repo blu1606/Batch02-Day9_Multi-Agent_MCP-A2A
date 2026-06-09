@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A2A Legal Multi-Agent System Interactive Demo</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-color: #0b0f19;
+            --card-bg: rgba(17, 25, 40, 0.75);
+            --card-border: rgba(255, 255, 255, 0.08);
+            --text-primary: #f3f4f6;
+            --text-secondary: #9ca3af;
+            --primary: #3b82f6;
+            --primary-glow: rgba(59, 130, 246, 0.5);
+            --accent-green: #10b981;
+            --accent-purple: #8b5cf6;
+            --accent-yellow: #f59e0b;
+            --accent-red: #ef4444;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            min-height: 100vh;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(59, 130, 246, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(139, 92, 246, 0.08) 0%, transparent 40%);
+            background-attachment: fixed;
+            overflow-x: hidden;
+            padding-bottom: 5rem;
+        }
+
+        header {
+            max-width: 1200px;
+            margin: 2rem auto 1.5rem auto;
+            padding: 0 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 800;
+            font-size: 1.8rem;
+            letter-spacing: -0.05em;
+            background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .badge-a2a {
+            font-size: 0.75rem;
+            padding: 0.2rem 0.6rem;
+            border-radius: 9999px;
+            background: rgba(139, 92, 246, 0.2);
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            color: #c084fc;
+            font-weight: 500;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        @media (max-width: 900px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Glassmorphic Panel styling */
+        .panel {
+            background: var(--card-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--card-border);
+            border-radius: 1.2rem;
+            padding: 2rem;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .panel:hover {
+            border-color: rgba(255, 255, 255, 0.12);
+            box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.5);
+        }
+
+        h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding-bottom: 0.8rem;
+        }
+
+        /* Form Controls */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-weight: 500;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 120px;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 0.6rem;
+            color: #fff;
+            padding: 1rem;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.95rem;
+            resize: vertical;
+            transition: all 0.3s ease;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+        }
+
+        /* Toggle Switches */
+        .toggle-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .toggle-box {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: 0.8rem;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .toggle-box:hover {
+            background: rgba(255, 255, 255, 0.04);
+            border-color: rgba(255, 255, 255, 0.08);
+        }
+
+        .toggle-details {
+            display: flex;
+            flex-direction: column;
+            gap: 0.2rem;
+        }
+
+        .toggle-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .toggle-desc {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 44px;
+            height: 24px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(255, 255, 255, 0.1);
+            transition: .3s;
+            border-radius: 24px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: .3s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: var(--primary);
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(20px);
+        }
+
+        /* Preset Chips */
+        .preset-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .preset-chip {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 9999px;
+            padding: 0.4rem 0.8rem;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .preset-chip:hover {
+            background: rgba(59, 130, 246, 0.1);
+            border-color: rgba(59, 130, 246, 0.3);
+            color: #60a5fa;
+        }
+
+        /* Port config & Send Button */
+        .action-row {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .port-select-wrapper {
+            flex: 1;
+        }
+
+        select {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 0.6rem;
+            color: #fff;
+            padding: 0.8rem 1rem;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.9rem;
+            outline: none;
+            cursor: pointer;
+        }
+
+        .btn-send {
+            flex: 1.5;
+            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+            border: none;
+            border-radius: 0.6rem;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            box-shadow: 0 4px 14px 0 rgba(37, 99, 235, 0.3);
+            transition: all 0.2s ease;
+        }
+
+        .btn-send:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px 0 rgba(37, 99, 235, 0.4);
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+        }
+
+        .btn-send:active {
+            transform: translateY(1px);
+        }
+
+        .btn-send:disabled {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-secondary);
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+
+        /* Execution Flow Visualizer */
+        .flow-visualizer {
+            background: rgba(0, 0, 0, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            border-radius: 0.8rem;
+            padding: 1.2rem;
+            margin-top: 1.5rem;
+            position: relative;
+        }
+
+        .flow-title {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .flow-steps {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+        }
+
+        .flow-line {
+            position: absolute;
+            top: 20px;
+            left: 10px;
+            right: 10px;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.08);
+            z-index: 1;
+        }
+
+        .flow-line-active {
+            position: absolute;
+            top: 20px;
+            left: 10px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary) 0%, var(--accent-purple) 100%);
+            width: 0%;
+            transition: width 1s ease;
+            z-index: 2;
+        }
+
+        .flow-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            z-index: 3;
+            flex: 1;
+        }
+
+        .step-node {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #111827;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            transition: all 0.5s ease;
+        }
+
+        .flow-step.active .step-node {
+            border-color: var(--primary);
+            color: var(--primary);
+            box-shadow: 0 0 15px var(--primary-glow);
+            background: rgba(59, 130, 246, 0.1);
+        }
+
+        .flow-step.success .step-node {
+            border-color: var(--accent-green);
+            color: var(--accent-green);
+            background: rgba(16, 185, 129, 0.1);
+            box-shadow: 0 0 15px rgba(16, 185, 129, 0.2);
+        }
+
+        .flow-step.failed .step-node {
+            border-color: var(--accent-red);
+            color: var(--accent-red);
+            background: rgba(239, 68, 68, 0.1);
+        }
+
+        .step-label {
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            text-align: center;
+            transition: color 0.3s ease;
+        }
+
+        .flow-step.active .step-label {
+            color: #fff;
+        }
+
+        /* Results / Output Panel */
+        .output-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .latency-container {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .latency-badge {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 0.5rem;
+            padding: 0.3rem 0.6rem;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .latency-val {
+            font-weight: 700;
+            color: var(--accent-yellow);
+        }
+
+        .output-content {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 0.8rem;
+            padding: 1.5rem;
+            min-height: 250px;
+            max-height: 500px;
+            overflow-y: auto;
+            font-family: inherit;
+            line-height: 1.6;
+            white-space: pre-wrap;
+            font-size: 0.95rem;
+        }
+
+        /* Compare Info Box */
+        .compare-box {
+            margin-top: 1.5rem;
+            background: rgba(59, 130, 246, 0.05);
+            border: 1px solid rgba(59, 130, 246, 0.15);
+            border-radius: 0.8rem;
+            padding: 1rem;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.8rem;
+        }
+
+        .compare-box i {
+            color: var(--primary);
+            font-size: 1.2rem;
+            margin-top: 0.1rem;
+        }
+
+        .compare-title {
+            font-weight: 600;
+            color: #60a5fa;
+            margin-bottom: 0.2rem;
+        }
+
+        /* CORS Alert */
+        .cors-alert {
+            max-width: 1200px;
+            margin: 1.5rem auto;
+            padding: 1rem 1.5rem;
+            background: rgba(245, 158, 11, 0.1);
+            border: 1px solid rgba(245, 158, 11, 0.2);
+            border-radius: 0.8rem;
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+            font-size: 0.85rem;
+            line-height: 1.4;
+            color: #fbd38d;
+        }
+
+        .cors-alert i {
+            font-size: 1.3rem;
+            color: var(--accent-yellow);
+        }
+
+        .cors-title {
+            font-weight: 700;
+            margin-bottom: 0.2rem;
+        }
+
+        .cors-alert code {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 0.1rem 0.3rem;
+            border-radius: 0.2rem;
+            font-family: monospace;
+            color: #fff;
+        }
+
+        /* Spinner */
+        .spinner {
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            <i class="fa-solid fa-network-wired"></i> A2A Agent Hub
+            <span class="badge-a2a">A2A Protocol</span>
+        </div>
+        <div style="font-size: 0.85rem; color: var(--text-secondary)">
+            <i class="fa-solid fa-clock"></i> Day 09 Codelab
+        </div>
+    </header>
+
+    <!-- CORS Alert Box -->
+    <div class="cors-alert">
+        <i class="fa-solid fa-triangle-exclamation"></i>
+        <div>
+            <div class="cors-title">Cơ chế bảo mật CORS trong trình duyệt</div>
+            Do các dịch vụ Agent chạy cục bộ không tích hợp sẵn cấu hình CORS, việc gửi yêu cầu trực tiếp từ file HTML trên trình duyệt sẽ bị chặn. 
+            Để demo hoạt động, vui lòng cài đặt tiện ích mở rộng <strong>Allow CORS</strong> trên Chrome/Firefox hoặc khởi chạy trình duyệt tắt chế độ bảo mật:
+            <br>
+            <code>chrome.exe --user-data-dir="C:/temp" --disable-web-security</code>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Control Panel -->
+        <div class="panel">
+            <h2><i class="fa-solid fa-sliders"></i> Bảng Điều Khiển</h2>
+            
+            <div class="form-group">
+                <label>Chọn câu hỏi mẫu</label>
+                <div class="preset-container">
+                    <button class="preset-chip" onclick="setQuestion(1)">Câu hỏi đầy đủ (Chung + Tax + Compliance + Data)</button>
+                    <button class="preset-chip" onclick="setQuestion(2)">Câu hỏi Thuế (Tax)</button>
+                    <button class="preset-chip" onclick="setQuestion(3)">Câu hỏi Tuân thủ & Bảo mật (GDPR)</button>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="question">Câu hỏi Pháp lý</label>
+                <textarea id="question" placeholder="Nhập câu hỏi pháp lý vào đây..."></textarea>
+            </div>
+
+            <!-- Optimization toggles -->
+            <div class="toggle-container">
+                <div class="toggle-box" onclick="toggleSwitch('parallel')">
+                    <div class="toggle-details">
+                        <span class="toggle-title">Chạy Song Song</span>
+                        <span class="toggle-desc">Gọi các sub-agents cùng lúc</span>
+                    </div>
+                    <label class="switch">
+                        <input type="checkbox" id="parallel" checked>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+
+                <div class="toggle-box" onclick="toggleSwitch('multi_model')">
+                    <div class="toggle-details">
+                        <span class="toggle-title">Đa Mô Hình</span>
+                        <span class="toggle-desc">Chạy sub-agents trên Groq</span>
+                    </div>
+                    <label class="switch">
+                        <input type="checkbox" id="multi_model" checked>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Endpoint Selector & Submit -->
+            <div class="form-group">
+                <label>Dịch vụ gọi điện</label>
+                <div class="action-row">
+                    <div class="port-select-wrapper">
+                        <select id="agentPort">
+                            <option value="10100">Customer Agent (Port 10100)</option>
+                            <option value="10101">Law Agent (Port 10101)</option>
+                            <option value="10102">Tax Agent (Port 10102)</option>
+                            <option value="10103">Compliance Agent (Port 10103)</option>
+                        </select>
+                    </div>
+                    <button class="btn-send" id="btnSend" onclick="sendQuery()">
+                        <i class="fa-solid fa-paper-plane" id="btnIcon"></i> <span id="btnText">Gửi Yêu Cầu</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Flow Trace Visualizer -->
+            <div class="flow-visualizer">
+                <div class="flow-title">Luồng thực thi của các Agent</div>
+                <div class="flow-steps">
+                    <div class="flow-line"></div>
+                    <div class="flow-line-active" id="flowLine"></div>
+                    
+                    <div class="flow-step" id="step-customer">
+                        <div class="step-node">1</div>
+                        <div class="step-label">Customer<br>:10100</div>
+                    </div>
+                    <div class="flow-step" id="step-law">
+                        <div class="step-node">2</div>
+                        <div class="step-label">Law<br>:10101</div>
+                    </div>
+                    <div class="flow-step" id="step-specialists">
+                        <div class="step-node">3</div>
+                        <div class="step-label">Specialists<br>(Parallel)</div>
+                    </div>
+                    <div class="flow-step" id="step-aggregate">
+                        <div class="step-node">4</div>
+                        <div class="step-label">Aggregate<br>Report</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Output Panel -->
+        <div class="panel">
+            <div class="output-header">
+                <h2><i class="fa-solid fa-square-poll-horizontal"></i> Kết Quả Báo Cáo</h2>
+                <div class="latency-container">
+                    <div class="latency-badge">
+                        <i class="fa-solid fa-stopwatch"></i>
+                        <span>Thời gian:</span>
+                        <span class="latency-val" id="elapsedVal">0.0s</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="output-content" id="output">Báo cáo tổng hợp pháp lý sẽ hiển thị tại đây sau khi hệ thống Multi-Agent xử lý xong...</div>
+
+            <!-- Compare Box -->
+            <div class="compare-box">
+                <i class="fa-solid fa-bolt-lightning"></i>
+                <div>
+                    <div class="compare-title">Hiệu năng tối ưu hóa thực tế</div>
+                    <div>
+                        • Luồng chạy mặc định (Tuần tự + OpenRouter): <strong>~50 - 55 giây</strong>
+                        <br>
+                        • Luồng chạy tối ưu (Song song + Đa mô hình Groq): <strong>~12 - 15 giây</strong> (Nhanh hơn <strong>~4 lần</strong>)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const QUESTIONS = {
+            1: "Nếu một công ty đại chúng vi phạm hợp đồng, trốn thuế (tax), vi phạm quy định compliance của SEC và làm rò rỉ dữ liệu (data) khách hàng thì hậu quả pháp lý thế nào?",
+            2: "Một công ty công nghệ có thu nhập từ nước ngoài không khai báo biểu mẫu FBAR và trốn thuế IRS thì mức phạt hình sự hoặc dân sự là bao nhiêu?",
+            3: "Quy định xử phạt của GDPR khi làm rò rỉ cơ sở dữ liệu khách hàng và không tuân thủ chính sách bảo mật dữ liệu cá nhân là gì?"
+        };
+
+        function setQuestion(id) {
+            document.getElementById('question').value = QUESTIONS[id];
+        }
+
+        function toggleSwitch(id) {
+            const checkbox = document.getElementById(id);
+            checkbox.checked = !checkbox.checked;
+        }
+
+        // Auto-fill first question on load
+        setQuestion(1);
+
+        let timerInterval = null;
+
+        function startTimer() {
+            let start = Date.now();
+            document.getElementById('elapsedVal').innerText = "0.0s";
+            timerInterval = setInterval(() => {
+                let diff = (Date.now() - start) / 1000;
+                document.getElementById('elapsedVal').innerText = diff.toFixed(1) + "s";
+            }, 100);
+        }
+
+        function stopTimer() {
+            clearInterval(timerInterval);
+        }
+
+        // Helper to generate UUID v4 in vanilla JS
+        function generateUUID() {
+            return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+                var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+                return v.toString(16);
+            });
+        }
+
+        function resetFlow() {
+            const steps = ['customer', 'law', 'specialists', 'aggregate'];
+            steps.forEach(s => {
+                document.getElementById(`step-${s}`).classList.remove('active', 'success', 'failed');
+            });
+            document.getElementById('flowLine').style.width = '0%';
+        }
+
+        async function sendQuery() {
+            const questionText = document.getElementById('question').value.trim();
+            if (!questionText) {
+                alert('Vui lòng nhập câu hỏi pháp lý!');
+                return;
+            }
+
+            const parallel = document.getElementById('parallel').checked;
+            const multiModel = document.getElementById('multi_model').checked;
+            const port = document.getElementById('agentPort').value;
+            const url = `http://localhost:${port}/`;
+
+            // UI Updates
+            const btnSend = document.getElementById('btnSend');
+            const btnIcon = document.getElementById('btnIcon');
+            const btnText = document.getElementById('btnText');
+            const output = document.getElementById('output');
+
+            btnSend.disabled = true;
+            btnIcon.className = "fa-solid fa-spinner spinner";
+            btnText.innerText = "Đang xử lý...";
+            output.innerText = "Đang gửi yêu cầu và khởi chạy hệ thống Agent (Có thể mất từ 12-50s tùy thuộc chế độ chạy)...";
+            
+            resetFlow();
+            startTimer();
+
+            // Mock Flow Visualization timing based on settings
+            const isParallel = parallel;
+            const isMulti = multiModel;
+            let stepDelay = isMulti ? 1500 : 5000; // Fast vs Slow
+
+            // Step 1: Customer Agent
+            document.getElementById('step-customer').classList.add('active');
+            
+            setTimeout(() => {
+                document.getElementById('step-customer').classList.remove('active');
+                document.getElementById('step-customer').classList.add('success');
+                document.getElementById('step-law').classList.add('active');
+                document.getElementById('flowLine').style.width = '33%';
+            }, 1500);
+
+            // Step 2: Law Agent
+            setTimeout(() => {
+                document.getElementById('step-law').classList.remove('active');
+                document.getElementById('step-law').classList.add('success');
+                document.getElementById('step-specialists').classList.add('active');
+                document.getElementById('flowLine').style.width = '66%';
+            }, 1500 + stepDelay);
+
+            // Step 3: Specialists
+            setTimeout(() => {
+                document.getElementById('step-specialists').classList.remove('active');
+                document.getElementById('step-specialists').classList.add('success');
+                document.getElementById('step-aggregate').classList.add('active');
+                document.getElementById('flowLine').style.width = '100%';
+            }, 1500 + stepDelay + (isParallel ? stepDelay : stepDelay * 2));
+
+            // Construct standard A2A JSON-RPC Payload
+            const messageId = generateUUID();
+            const requestId = generateUUID();
+            
+            const payload = {
+                id: requestId,
+                jsonrpc: "2.0",
+                method: "message/send",
+                params: {
+                    configuration: null,
+                    message: {
+                        contextId: null,
+                        extensions: null,
+                        kind: "message",
+                        messageId: messageId,
+                        metadata: {
+                            parallel: parallel,
+                            multi_model: multiModel
+                        },
+                        parts: [
+                            {
+                                kind: "text",
+                                metadata: null,
+                                text: questionText
+                            }
+                        ],
+                        referenceTaskIds: null,
+                        role: "user",
+                        taskId: null
+                    },
+                    metadata: null
+                }
+            };
+
+            try {
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(payload),
+                    mode: 'cors'
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const data = await response.json();
+                stopTimer();
+
+                // Step 4: Aggregate Completed
+                document.getElementById('step-aggregate').classList.remove('active');
+                document.getElementById('step-aggregate').classList.add('success');
+
+                // Parse A2A Response structure
+                let resultText = "";
+                if (data.result) {
+                    const res = data.result;
+                    if (res.artifacts && res.artifacts.length > 0) {
+                        res.artifacts.forEach(art => {
+                            if (art.parts) {
+                                art.parts.forEach(part => {
+                                    if (part.text) resultText += part.text;
+                                });
+                            }
+                        });
+                    } else if (res.parts && res.parts.length > 0) {
+                        res.parts.forEach(part => {
+                            if (part.text) resultText += part.text;
+                        });
+                    } else if (res.message && res.message.parts) {
+                        res.message.parts.forEach(part => {
+                            if (part.text) resultText += part.text;
+                        });
+                    }
+                }
+
+                if (!resultText) {
+                    // Fallback to raw stringified display if format differs
+                    resultText = JSON.stringify(data, null, 2);
+                }
+
+                output.innerText = resultText;
+
+            } catch (error) {
+                stopTimer();
+                // Set active node to failed
+                const activeStep = document.querySelector('.flow-step.active');
+                if (activeStep) {
+                    activeStep.classList.remove('active');
+                    activeStep.classList.add('failed');
+                }
+                
+                output.innerHTML = `<span style="color:var(--accent-red); font-weight:bold;">LỖI KẾT NỐI AGENT:</span>\n\nKhông thể kết nối đến Agent tại địa chỉ ${url}.\n\n` +
+                    `<strong>Nguyên nhân thường gặp:</strong>\n` +
+                    `1. Chưa khởi động các dịch vụ Agent (Vui lòng chạy <code>./start_all.sh</code> trong terminal).\n` +
+                    `2. Lỗi bảo mật CORS: Trình duyệt của bạn đang chặn kết nối chéo cổng. Hãy làm theo hướng dẫn màu cam phía trên để vô hiệu hóa CORS.\n\n` +
+                    `<strong>Chi tiết lỗi:</strong>\n${error.message}`;
+            } finally {
+                btnSend.disabled = false;
+                btnIcon.className = "fa-solid fa-paper-plane";
+                btnText.innerText = "Gửi Yêu Cầu";
+            }
+        }
+    </script>
+</body>
+</html>
