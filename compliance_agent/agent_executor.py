@@ -37,6 +37,15 @@ class ComplianceAgentExecutor(AgentExecutor):
         trace_id = metadata.get("trace_id", str(uuid4()))
         depth = int(metadata.get("delegation_depth", 0))
 
+        import time
+        from common.logging_utils import parallel_var, multi_model_var, trace_id_var, agent_name_var, log_event
+
+        start_time = time.time()
+        parallel_token = parallel_var.set(metadata.get("parallel", False))
+        multi_model_token = multi_model_var.set(metadata.get("multi_model", False))
+        trace_id_token = trace_id_var.set(trace_id)
+        agent_name_token = agent_name_var.set("compliance_agent")
+
         logger.info(
             "ComplianceAgent executing | task=%s context=%s trace=%s depth=%d",
             task_id, context_id, trace_id, depth,
@@ -69,13 +78,32 @@ class ComplianceAgentExecutor(AgentExecutor):
             )
             await updater.complete()
 
+            log_event("agent_execution", {
+                "duration_seconds": time.time() - start_time,
+                "status": "success",
+                "parallel": metadata.get("parallel", False),
+                "multi_model": metadata.get("multi_model", False)
+            })
+
         except Exception as exc:
+            log_event("agent_execution", {
+                "duration_seconds": time.time() - start_time,
+                "status": "failed",
+                "error": str(exc),
+                "parallel": metadata.get("parallel", False),
+                "multi_model": metadata.get("multi_model", False)
+            })
             logger.exception("ComplianceAgent execution error: %s", exc)
             await updater.failed(
                 updater.new_agent_message(
                     parts=[Part(root=TextPart(text=f"Compliance analysis failed: {exc}"))]
                 )
             )
+        finally:
+            parallel_var.reset(parallel_token)
+            multi_model_var.reset(multi_model_token)
+            trace_id_var.reset(trace_id_token)
+            agent_name_var.reset(agent_name_token)
 
     async def cancel(self, context: RequestContext, event_queue: EventQueue) -> None:
         task_id = context.task_id or str(uuid4())

@@ -99,4 +99,6 @@ async def main() -> None:
 
 
 if __name__ == "__main__":
+    import os
+    os.environ["AGENT_NAME"] = "law_agent"
     asyncio.run(main())
