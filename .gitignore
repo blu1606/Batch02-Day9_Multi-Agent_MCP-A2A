@@ -3,3 +3,7 @@
 **cache**
 .claude
 **SOLUTION**
+agent_execution_logs.jsonl
+*.png
+.deepeval/
+plans/
