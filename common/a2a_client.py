@@ -54,6 +54,8 @@ async def delegate(
         # Build deprecated (legacy) A2AClient — straightforward for send_message
         client = A2AClient(httpx_client=http_client, agent_card=agent_card)
 
+        from common.logging_utils import parallel_var, multi_model_var
+
         # Build message with trace metadata
         message = Message(
             role=Role.user,
@@ -64,6 +66,8 @@ async def delegate(
                 "trace_id": trace_id,
                 "context_id": context_id,
                 "delegation_depth": depth,
+                "parallel": parallel_var.get(),
+                "multi_model": multi_model_var.get(),
             },
         )
 
