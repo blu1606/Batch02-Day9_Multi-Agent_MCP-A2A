@@ -15,14 +15,23 @@ load_dotenv()
 CUSTOMER_AGENT_URL = os.getenv("CUSTOMER_AGENT_URL", "http://localhost:10100")
 
 QUESTION = (
-    "If a company breaks a contract and avoids taxes, "
-    "what are the legal and regulatory consequences?"
+    "If a public company breaches a contract with a supplier, engages in tax evasion, "
+    "and violates SEC regulatory compliance rules (like SOX or AML), "
+    "what are the legal, tax, and compliance consequences?"
 )
 
 
+
 async def main() -> None:
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--parallel", action="store_true", help="Run agents in parallel")
+    parser.add_argument("--multi-model", action="store_true", help="Use multi-model execution")
+    args, _ = parser.parse_known_args()
+
     print(f"Connecting to Customer Agent at {CUSTOMER_AGENT_URL}")
     print(f"Question: {QUESTION}")
+    print(f"Mode: {'PARALLEL' if args.parallel else 'SEQUENTIAL'}, Multi-Model: {'ENABLED' if args.multi_model else 'DISABLED'}")
     print("-" * 60)
 
     async with httpx.AsyncClient(timeout=300.0) as http_client:
@@ -54,14 +63,22 @@ async def main() -> None:
             role=Role.user,
             parts=[Part(root=TextPart(text=QUESTION))],
             message_id=str(uuid4()),
+            metadata={
+                "parallel": args.parallel,
+                "multi_model": args.multi_model,
+            }
         )
         request = SendMessageRequest(
             id=str(uuid4()),
             params=MSP(message=message),
         )
 
+        import time
+        start_time = time.time()
         print("Sending request (this may take 30-60s while agents chain)...\n")
         response = await client.send_message(request)
+        elapsed = time.time() - start_time
+        print(f"Latency: {elapsed:.2f} seconds\n")
 
         # Parse response
         result_text = ""
