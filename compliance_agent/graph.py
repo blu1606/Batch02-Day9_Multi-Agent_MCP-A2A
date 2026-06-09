@@ -9,6 +9,7 @@ from __future__ import annotations
 from langgraph.prebuilt import create_react_agent
 
 from common.llm import get_llm
+from common.logging_utils import multi_model_var
 
 COMPLIANCE_SYSTEM_PROMPT = """You are a senior regulatory compliance officer and corporate attorney
 with deep expertise in:
@@ -36,13 +37,25 @@ Always note that your response is for educational purposes and the user
 should consult a licensed attorney for specific compliance advice.
 """
 
+MULTI_MODEL_CONCISE_PROMPT = """
+
+Multi-model execution is enabled. Keep the response concise and specialist-only:
+- Use at most 5 bullets.
+- Focus on compliance-specific additions only.
+- Do not repeat contract-law or tax analysis.
+- Keep each bullet under 35 words.
+"""
+
 
 def create_graph():
     """Return a compiled LangGraph create_react_agent for compliance questions."""
     llm = get_llm()
+    prompt = COMPLIANCE_SYSTEM_PROMPT
+    if multi_model_var.get():
+        prompt += MULTI_MODEL_CONCISE_PROMPT
     graph = create_react_agent(
         model=llm,
         tools=[],
-        prompt=COMPLIANCE_SYSTEM_PROMPT,
+        prompt=prompt,
     )
     return graph

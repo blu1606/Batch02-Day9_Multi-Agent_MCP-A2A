@@ -45,6 +45,8 @@ class LawState(TypedDict):
     tax_result: Annotated[str, _last_wins]
     compliance_result: Annotated[str, _last_wins]
     final_answer: str
+    parallel: bool
+    multi_model: bool
 
 
 # ---------------------------------------------------------------------------
@@ -116,20 +118,38 @@ async def check_routing(state: LawState) -> dict:
 
 
 def route_to_subagents(state: LawState) -> list[Send]:
-    """Routing function: dispatch parallel Send objects based on routing flags.
+    """Routing function: dispatch parallel/sequential Send objects based on routing flags."""
+    is_parallel = state.get("parallel", False)
+    
+    if is_parallel:
+        sends: list[Send] = []
+        if state.get("needs_tax"):
+            sends.append(Send("call_tax", state))
+        if state.get("needs_compliance"):
+            sends.append(Send("call_compliance", state))
+        if not sends:
+            sends.append(Send("aggregate", state))
+        return sends
+    else:
+        # Sequential mode
+        if state.get("needs_tax"):
+            return [Send("call_tax", state)]
+        elif state.get("needs_compliance"):
+            return [Send("call_compliance", state)]
+        else:
+            return [Send("aggregate", state)]
 
-    This function is used with add_conditional_edges; it returns a list of
-    Send objects which LangGraph executes as parallel branches.
-    """
-    sends: list[Send] = []
-    if state.get("needs_tax"):
-        sends.append(Send("call_tax", state))
-    if state.get("needs_compliance"):
-        sends.append(Send("call_compliance", state))
-    if not sends:
-        # No sub-agents needed — go straight to aggregation
-        sends.append(Send("aggregate", state))
-    return sends
+
+def route_after_tax(state: LawState) -> str:
+    """Routing function executed after call_tax to implement sequential flow."""
+    is_parallel = state.get("parallel", False)
+    if is_parallel:
+        return "aggregate"
+    else:
+        if state.get("needs_compliance"):
+            return "call_compliance"
+        else:
+            return "aggregate"
 
 
 async def call_tax(state: LawState) -> dict:
@@ -229,7 +249,11 @@ def create_graph():
         ["call_tax", "call_compliance", "aggregate"],
     )
 
-    graph.add_edge("call_tax", "aggregate")
+    graph.add_conditional_edges(
+        "call_tax",
+        route_after_tax,
+        ["call_compliance", "aggregate"]
+    )
     graph.add_edge("call_compliance", "aggregate")
     graph.add_edge("aggregate", END)
 
